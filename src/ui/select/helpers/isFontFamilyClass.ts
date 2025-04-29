@@ -1,3 +1,5 @@
+//стартовый. не трогать
+
 import {
 	FontFamiliesClasses,
 	fontFamilyClasses,
