@@ -1,5 +1,5 @@
 #Проектная работа blog-customizer
-##первая итерация - 10 проектная работа 
+##вторая итерация - 10 проектная работа 
 ###https://github.com/LenaMenson/blog-customizer.git
 ####https://lenamenson.github.io/blog-customizer/
 

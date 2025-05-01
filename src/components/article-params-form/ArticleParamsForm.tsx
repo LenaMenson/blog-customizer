@@ -34,6 +34,15 @@ export const ArticleParamsForm = ({setArticleParamsFormState}: ArticleParamsForm
 	const [backgroundColor, setBackgroundColor] = useState(defaultArticleState.backgroundColor);
 	const [contentWidth, setContentWidth] = useState(defaultArticleState.contentWidth);
 
+	// закрытие формы по клику вне формы
+	const ref = useRef<HTMLDivElement | null>(null);
+
+	useOutsideClickClose({
+		isOpen: isFormOpen,
+		rootRef: ref,
+		onClose: () => setFormIsOpen(false)
+	});
+
 	// изменение значений переменных
 	const clickSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -49,52 +58,68 @@ export const ArticleParamsForm = ({setArticleParamsFormState}: ArticleParamsForm
 
 	// сброс значений до начальных
 	const clickReset = () => {
-		console.log('clickReset');
 		setArticleParamsFormState(defaultArticleState);
+		setFontFamily(defaultArticleState.fontFamilyOption);
+        setFontColor(defaultArticleState.fontColor);
+        setBackgroundColor(defaultArticleState.backgroundColor);
+        setContentWidth(defaultArticleState.contentWidth);
+        setFontsize(defaultArticleState.fontSizeOption);
 	};
-
-	// закрытие формы по клику вне формы
-	const ref = useRef<HTMLDivElement | null>(null);
-
-	useOutsideClickClose({
-		isOpen: isFormOpen,
-		rootRef: ref,
-		onClose: () => {
-			console.log('OutsideClickClose2');
-			setFormIsOpen(false)
-		},
-
-	});
 
 	return (
 		<div ref={ref}>
-			<ArrowButton
-			isOpen={isFormOpen}
-			onClick={() => {
-				console.log('click ArrowButton');
-				setFormIsOpen(!isFormOpen)
-			}} />
-			<aside className={clsx(styles.container, {[styles.container_open]: isFormOpen,})}>
-				<form className={styles.form} onSubmit={clickSubmit} onReset={clickReset}>
-
-					<Select	selected={fontFamily} onChange={setFontFamily} options={fontFamilyOptions} title='шрифт' />
-
-					<RadioGroup	name='fontSize' options={fontSizeOptions} selected={fontSize} onChange={setFontsize} title='размер шрифта' />
-
-					<Select	selected={fontColor} onChange={setFontColor} options={fontColors} title='цвет шрифта' />
-
-					<Separator />
-
-					<Select	selected={backgroundColor} onChange={setBackgroundColor} options={backgroundColors} title='цвет фона'	/>
-
-					<Select	selected={contentWidth} onChange={setContentWidth} options={contentWidthArr} title='ширина контента' />
-
-					<div className={styles.bottomContainer}>
-						<Button title='Сбросить' htmlType='reset' type='clear' />
-						<Button title='Применить' htmlType='submit' type='apply' />
-					</div>
-				</form>
-			</aside>
-		</div>
+		<ArrowButton
+		  isOpen={isFormOpen}
+		  onClick={() => setFormIsOpen(!isFormOpen)}
+		/>
+		<aside
+		  className={clsx(styles.container, { [styles.container_open]: isFormOpen })}
+		>
+		  <form
+			className={styles.form}
+			onSubmit={clickSubmit}
+			onReset={clickReset}>
+			<Text size={31} weight={800} uppercase>
+			  Задайте параметры
+			</Text>
+			<Select
+			  selected={fontFamily}
+			  onChange={setFontFamily}
+			  options={fontFamilyOptions}
+			  title="шрифт"
+			/>
+			<RadioGroup
+			  name="fontSize"
+			  options={fontSizeOptions}
+			  selected={fontSize}
+			  onChange={setFontsize}
+			  title="размер шрифта"
+			/>
+			<Select
+			  selected={fontColor}
+			  onChange={setFontColor}
+			  options={fontColors}
+			  title="цвет шрифта"
+			/>
+			<Separator />
+			<Select
+			  selected={backgroundColor}
+			  onChange={setBackgroundColor}
+			  options={backgroundColors}
+			  title="цвет фона"
+			/>
+			<Select
+			  selected={contentWidth}
+			  onChange={setContentWidth}
+			  options={contentWidthArr}
+			  title="ширина контента"
+			/>
+			<div className={styles.bottomContainer}>
+			  <Button title="Сбросить" htmlType="reset" type="clear" />
+			  <Button title="Применить" htmlType="submit" type="apply" />
+			</div>
+		  </form>
+		</aside>
+	  </div>
 	);
 };
