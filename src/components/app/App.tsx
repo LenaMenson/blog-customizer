@@ -8,7 +8,8 @@ import {
 } from 'src/constants/articleProps';
 
 export const App = () => {
-	const [articleStyleState, setArticleStyleState] = useState<ArticleStateType>(defaultArticleState);
+	const [articleStyleState, setArticleStyleState] =
+		useState<ArticleStateType>(defaultArticleState);
 	return (
 		<main
 			className={styles.main}
