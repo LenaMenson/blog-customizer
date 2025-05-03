@@ -1,3 +1,9 @@
+#Проектная работа blog-customizer
+##вторая итерация - 10 проектная работа 
+###https://github.com/LenaMenson/blog-customizer.git
+####https://lenamenson.github.io/blog-customizer/
+
+
 # Проектная работа: Вёрстка проекта
 
 ## Шаг первый. Изучаем имеющиеся компоненты
